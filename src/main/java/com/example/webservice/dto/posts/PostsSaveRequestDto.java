@@ -1,5 +1,6 @@
-package com.example.webservice.domain.posts;
+package com.example.webservice.dto.posts;
 
+import com.example.webservice.domain.posts.Posts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
