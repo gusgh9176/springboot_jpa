@@ -19,3 +19,7 @@ notifications:
   email:
     recipients:
       - gusgh9176@naver.com
+
+# gradlew 실행 권한 주기
+before_install:
+  - chomod +x gradlew
