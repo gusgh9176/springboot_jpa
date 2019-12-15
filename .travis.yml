@@ -12,6 +12,10 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
+# gradlew 실행 권한 주기
+before_script:
+  - chomod a+x gradlew
+
 script: "/gradlew clean build"
 
 # CI 실행 완료시 메일로 알람
@@ -20,6 +24,3 @@ notifications:
     recipients:
       - gusgh9176@naver.com
 
-# gradlew 실행 권한 주기
-before_script:
-  - chomod a+x gradlew
