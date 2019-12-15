@@ -15,11 +15,6 @@ spring:
   h2:
     console:
       enabled: true
----
-spring:
-  profiles: set1
-server:
-  port: 8081
 #spring:
 #  h2:
 #    console:
