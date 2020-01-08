@@ -2,47 +2,229 @@
 <html>
 <head>
     <title>스프링부트 웹서비스</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!--부트스트랩 css 추가-->
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+
+    <style>
+        tr {
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        #price {
+            text-align: right;
+        }
+
+        .firstColumn {
+            background-color: #DDDBDB;
+        }
+
+    </style>
 </head>
 <body>
-<h1>스프링부트로 시작하는 웹 서비스</h1>
-<div class="col-md-12">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록</button>
-    <br/>
-    <br/>
-    <!-- 목록 출력 영역 -->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        {{#each posts}}
+<h1>견적</h1>
+<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+        data-target="#savePostsModal">추가</button>
+<button type="button" class="btn btn-primary btn-sm" id="btn-test2">숨기기</button>
+<button type="button" class="btn btn-primary btn-sm" id="btn-test">보이기</button>
+<br/>
+<div class="row">
+    <div class="col-md-5">
+        <!-- 목록 출력 영역 -->
+        <table class="table table-horizontal table-bordered" id="table-list">
+            <thead class="thead-strong">
             <tr>
-                <td>{{id}}</td>
-                <td>{{title}}</td>
-                <td>{{author}}</td>
-                <td>{{modifiedDate}}</td>
+                <th width="15%">분류</th>
+                <th width="40%">품목</th>
+                <th width="15%">규격</th>
+                <th width="15%">단가</th>
+                <th width="15%"></th>
             </tr>
-        {{/each}}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody id="tbodySkeleton">
+            {{#each posts}}
+                <tr>
+                    <td class="classification">골조</td>
+                    <td class="item">SPF</td>
+                    <td class="standard">2x6" 12'</td>
+                    <td class="price">10,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton">선택
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            {{#each posts}}
+                <tr>
+                    <td class="classification">골조</td>
+                    <td class="item">SPF</td>
+                    <td class="standard">2x6" 12'</td>
+                    <td class="price">10,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton">선택
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+
+            <tbody id="tbodyInsulation">
+            {{#each posts}}
+                <tr>
+                    <td>단열</td>
+                    <td>ICYENE ProSeal HFO</td>
+                    <td>100T</td>
+                    <td>35,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" id="btn-insulation">추가
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+
+            <tbody id="tbodyExterior">
+            {{#each posts}}
+                <tr>
+                    <td>외장마감</td>
+                    <td>웨더그루브 내추럴</td>
+                    <td>9.5T</td>
+                    <td>30,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" id="btn-exterior">추가
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+
+            <tbody id="tbodyInterior">
+            {{#each posts}}
+                <tr>
+                    <td>내장마감</td>
+                    <td>ICYENE ProSeal HFO</td>
+                    <td>100T</td>
+                    <td>35,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" id="btn-interior">추가
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+
+            <tbody id="tbodyWindow">
+            {{#each posts}}
+                <tr>
+                    <td>창호</td>
+                    <td>ICYENE ProSeal HFO</td>
+                    <td>100T</td>
+                    <!-- <td>{{author}}</td> -->
+                    <td>35,000원</td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm" id="btn-window">완료
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <!-- 가격 출력 영역 -->
+    <div class="col-md-6">
+        <table class="table table-horizontal table-bordered" id="table-purchaseList">
+            <thead class="thead-strong">
+            <tr>
+                <th colspan="2" width="20%">분류</th>
+                <th width="35%">품목</th>
+                <th width="15%">규격</th>
+                <th width="10%">갯수</th>
+                <th width="20%">단가</th>
+            </tr>
+            </thead>
+
+
+            <tbody class="tbody-purchaseList">
+            <tr>
+                <td class="firstColumn" colspan="2">n번째 골조</td>
+                <td>SPF</td>
+                <td>2x6" 12'</td>
+                <td>
+                    <select class="form-control">
+                        <option>1</option>
+                    </select>
+                </td>
+                <td id="price">10,000원
+                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="firstColumn" width="5%"></td>
+                <td>단열</td>
+                <td>ICYENE ProSeal HFO</td>
+                <td>2x6" 12'</td>
+                <td>
+                    <select class="form-control">
+                        <option>1</option>
+                    </select>
+                </td>
+                <td id="price">10,000원
+                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="firstColumn"></td>
+                <td>외장마감</td>
+                <td>웨더그루브 내추럴</td>
+                <td>9.5T</td>
+                <td>
+                    <select class="form-control">
+                        <option>1</option>
+                    </select>
+                </td>
+                <td id="price">10,000원
+                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+
+
+            <tfoot>
+            <tr>
+                <td>총합</td>
+                <td id="price" colspan="5">20,000원</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
 </div>
 
+
 <!-- Modal 영역 -->
-<div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
+<div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="savePostsLabel">게시글 등록</h5>
+                <h5 class="modal-title" id="savePostsLabel">등록</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -76,7 +258,7 @@
 <script src="/js/lib/bootstrap.min.js"></script>
 
 <!--custom js 추가-->
-<script src="/js/app/main.js"></script>
+<script src="/js/app/main.js?ver=2"></script>
 
 </body>
 </html>
