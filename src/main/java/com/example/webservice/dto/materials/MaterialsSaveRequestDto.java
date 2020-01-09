@@ -11,22 +11,25 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MaterialsSaveRequestDto {
 
-    private String title;
-    private String content;
-    private String author;
+    private String classification;
+    private String item;
+    private String standard;
+    private String price;
 
     @Builder
-    public MaterialsSaveRequestDto(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
+    public MaterialsSaveRequestDto(String classification, String item, String standard, String price) {
+        this.classification = classification;
+        this.item = item;
+        this.standard = standard;
+        this.price = price;
     }
 
     public Materials toEntity(){
         return Materials.builder()
-                .title(title)
-                .content(content)
-                .author(author)
+                .classification(classification)
+                .item(item)
+                .standard(standard)
+                .price(price)
                 .build();
     }
 }

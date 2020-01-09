@@ -10,14 +10,18 @@ import java.util.Optional;
 @Getter
 public class MaterialsMainResponseDto {
     private Long id;
-    private String title;
-    private String author;
+    private String classification;
+    private String item;
+    private String standard;
+    private String price;
     private String modifiedDate;
 
     public MaterialsMainResponseDto(Materials entity) {
         id = entity.getId();
-        title = entity.getTitle();
-        author = entity.getAuthor();
+        classification = entity.getClassification();
+        item = entity.getItem();
+        standard = entity.getStandard();
+        price = entity.getPrice();
         modifiedDate = toStringDateTime(entity.getModifiedDate());
     }
 

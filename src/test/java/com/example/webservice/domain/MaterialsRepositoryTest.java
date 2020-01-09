@@ -36,9 +36,10 @@ public class MaterialsRepositoryTest {
     public void 게시글저장_불러오기() {
         //given
         postsRepository.save(Materials.builder()
-                .title("test title")
-                .content("test content")
-                .author("jojoldu@gmail.com")
+                .classification("test title")
+                .item("test content")
+                .standard("jojoldu@gmail.com")
+                .price("10,000원")
                 .build());
 
         //when
@@ -46,8 +47,8 @@ public class MaterialsRepositoryTest {
 
         //then
         Materials posts = postsList.get(0);
-        assertThat(posts.getTitle(), is("test title"));
-        assertThat(posts.getContent(), is("test content"));
+        assertThat(posts.getClassification(), is("test title"));
+        assertThat(posts.getItem(), is("test content"));
     }
 
     @Test
@@ -55,9 +56,10 @@ public class MaterialsRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.now();
         postsRepository.save(Materials.builder()
-                .title("테스트 게시글")
-                .content("테스트 본문")
-                .author("jojoldu@gmail.com")
+                .classification("테스트 게시글")
+                .item("테스트 본문")
+                .standard("jojoldu@gmail.com")
+                .price("10,000원")
                 .build());
         //when
         List<Materials> postsList = postsRepository.findAll();

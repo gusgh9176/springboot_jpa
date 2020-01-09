@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class WebController {
 
-    private MaterialsService postsService;
+    private MaterialsService materialsService;
 
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
+        model.addAttribute("posts", materialsService.findAllDesc());
         return "main";
     }
 

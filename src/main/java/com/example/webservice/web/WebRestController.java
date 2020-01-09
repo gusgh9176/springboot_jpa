@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class WebRestController {
 
-    private MaterialsService postsService;
+    private MaterialsService materialsService;
 
     @GetMapping("/hello")
     public String hello() {
         return "HelloWorld";
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/materials")
     public Long savePosts(@RequestBody MaterialsSaveRequestDto dto){
-        return postsService.save(dto);
+        return materialsService.save(dto);
     }
 }

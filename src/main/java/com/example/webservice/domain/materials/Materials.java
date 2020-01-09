@@ -19,18 +19,22 @@ public class Materials extends BaseTimeEntity {
     private Long id;
 
     @Column(length = 500, nullable = false)
-    private String title;
+    private String classification;
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
+    private String item;
 
-    @Column
-    private String author;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String standard;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String price;
 
     @Builder
-    public Materials(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
+    public Materials(String classification, String item, String standard, String price) {
+        this.classification = classification;
+        this.item = item;
+        this.standard = standard;
+        this.price = price;
     }
 }

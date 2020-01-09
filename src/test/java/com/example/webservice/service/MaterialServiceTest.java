@@ -32,9 +32,10 @@ public class MaterialServiceTest {
     public void Dto데이터가_posts테이블에_저장된다 () {
         //given
         MaterialsSaveRequestDto dto = MaterialsSaveRequestDto.builder()
-                .author("jojoldu@gmail.com")
-                .content("테스트")
-                .title("테스트 타이틀")
+                .price("10,000원")
+                .standard("jojoldu@gmail.com")
+                .item("테스트")
+                .classification("테스트 타이틀")
                 .build();
 
         //when
@@ -42,8 +43,9 @@ public class MaterialServiceTest {
 
         //then
         Materials posts = postsRepository.findAll().get(0);
-        assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
-        assertThat(posts.getContent()).isEqualTo(dto.getContent());
-        assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(posts.getPrice()).isEqualTo(dto.getPrice());
+        assertThat(posts.getStandard()).isEqualTo(dto.getStandard());
+        assertThat(posts.getItem()).isEqualTo(dto.getItem());
+        assertThat(posts.getClassification()).isEqualTo(dto.getClassification());
     }
 }

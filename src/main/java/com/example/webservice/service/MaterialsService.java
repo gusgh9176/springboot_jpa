@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class MaterialsService {
-    private MaterialsRepository postsRepository;
+    private MaterialsRepository materialsRepository;
 
     @Transactional
     public Long save(MaterialsSaveRequestDto dto){
-        return postsRepository.save(dto.toEntity()).getId();
+        return materialsRepository.save(dto.toEntity()).getId();
     }
 
     @Transactional(readOnly = true)
     public List<MaterialsMainResponseDto> findAllDesc() {
-        return postsRepository.findAllDesc()
+        return materialsRepository.findAllDesc()
                 .map(MaterialsMainResponseDto::new)
                 .collect(Collectors.toList());
     }
