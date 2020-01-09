@@ -4,7 +4,7 @@ var main = {
         var id = $('.classification').length;
         $('tbody').hide();
         $('#tbodySkeleton').show();
-        $('.tbody-purchaseList').show();
+        $('#tbody-purchaseList').show();
 
         $('#btn-save').on('click', function () {
             _this.save();

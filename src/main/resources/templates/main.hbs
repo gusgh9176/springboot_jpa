@@ -51,12 +51,12 @@
             <tbody id="tbodySkeleton">
             {{#each materials}}
                 <tr>
-                    <td class="classification{{id}}">{{classification}}</td>
-                    <td class="item{{id}}">{{item}}</td>
-                    <td class="standard{{id}}">{{standard}}</td>
-                    <td class="price{{id}}">{{price}}</td>
+                    <td id="classification{{id}}">{{classification}}</td>
+                    <td id="item{{id}}">{{item}}</td>
+                    <td id="standard{{id}}">{{standard}}</td>
+                    <td id="price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton{{id}}">선택
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton{{id}}" onclick="skeleton_click({{id}})">선택
                         </button>
                     </td>
                 </tr>
@@ -147,15 +147,15 @@
             <thead class="thead-strong">
             <tr>
                 <th colspan="2" width="20%">분류</th>
-                <th width="35%">품목</th>
+                <th width="30%">품목</th>
                 <th width="15%">규격</th>
-                <th width="10%">갯수</th>
+                <th width="15%">갯수</th>
                 <th width="20%">단가</th>
             </tr>
             </thead>
 
 
-            <tbody class="tbody-purchaseList">
+            <tbody id="tbody-purchaseList">
             <tr>
                 <td class="firstColumn" colspan="2">n번째 골조</td>
                 <td>SPF</td>
@@ -165,7 +165,7 @@
                         <option>1</option>
                     </select>
                 </td>
-                <td id="price">10,000원
+                <td>10,000원
                     <button type="button" class="btn btn-outline-secondary btn-sm">삭제
                     </button>
                 </td>
@@ -181,7 +181,7 @@
                         <option>1</option>
                     </select>
                 </td>
-                <td id="price">10,000원
+                <td>10,000원
                     <button type="button" class="btn btn-outline-secondary btn-sm">삭제
                     </button>
                 </td>
@@ -197,7 +197,7 @@
                         <option>1</option>
                     </select>
                 </td>
-                <td id="price">10,000원
+                <td>10,000원
                     <button type="button" class="btn btn-outline-secondary btn-sm">삭제
                     </button>
                 </td>
@@ -208,7 +208,7 @@
             <tfoot>
             <tr>
                 <td>총합</td>
-                <td id="price" colspan="5">20,000원</td>
+                <td colspan="5">20,000원</td>
             </tr>
             </tfoot>
         </table>
@@ -259,6 +259,7 @@
 
 <!--custom js 추가-->
 <script src="/js/app/main.js?ver=3"></script>
+<script src="/js/app/button.js?ver=1"></script>
 
 </body>
 </html>
