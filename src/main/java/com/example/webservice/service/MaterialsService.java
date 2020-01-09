@@ -1,8 +1,8 @@
 package com.example.webservice.service;
 
-import com.example.webservice.domain.posts.PostsRepository;
-import com.example.webservice.dto.posts.PostsMainResponseDto;
-import com.example.webservice.dto.posts.PostsSaveRequestDto;
+import com.example.webservice.domain.materials.MaterialsRepository;
+import com.example.webservice.dto.materials.MaterialsMainResponseDto;
+import com.example.webservice.dto.materials.MaterialsSaveRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class PostsService {
-    private PostsRepository postsRepository;
+public class MaterialsService {
+    private MaterialsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto dto){
+    public Long save(MaterialsSaveRequestDto dto){
         return postsRepository.save(dto.toEntity()).getId();
     }
 
     @Transactional(readOnly = true)
-    public List<PostsMainResponseDto> findAllDesc() {
+    public List<MaterialsMainResponseDto> findAllDesc() {
         return postsRepository.findAllDesc()
-                .map(PostsMainResponseDto::new)
+                .map(MaterialsMainResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

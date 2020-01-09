@@ -1,6 +1,6 @@
 package com.example.webservice.web;
 
-import com.example.webservice.service.PostsService;
+import com.example.webservice.service.MaterialsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class WebController {
 
-    private PostsService postsService;
+    private MaterialsService postsService;
 
     @GetMapping("/")
     public String main(Model model) {

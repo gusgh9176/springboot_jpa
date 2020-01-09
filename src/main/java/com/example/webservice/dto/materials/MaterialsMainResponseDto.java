@@ -1,6 +1,6 @@
-package com.example.webservice.dto.posts;
+package com.example.webservice.dto.materials;
 
-import com.example.webservice.domain.posts.Posts;
+import com.example.webservice.domain.materials.Materials;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -8,13 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Getter
-public class PostsMainResponseDto {
+public class MaterialsMainResponseDto {
     private Long id;
     private String title;
     private String author;
     private String modifiedDate;
 
-    public PostsMainResponseDto(Posts entity) {
+    public MaterialsMainResponseDto(Materials entity) {
         id = entity.getId();
         title = entity.getTitle();
         author = entity.getAuthor();

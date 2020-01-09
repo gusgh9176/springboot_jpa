@@ -1,4 +1,4 @@
-package com.example.webservice.domain.posts;
+package com.example.webservice.domain.materials;
 
 import com.example.webservice.domain.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Posts extends BaseTimeEntity {
+public class Materials extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Posts extends BaseTimeEntity {
     private String author;
 
     @Builder
-    public Posts(String title, String content, String author) {
+    public Materials(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;

@@ -2,11 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'war' // jar 파일 생성할 때는 주석 처리
 }
 
 group = 'com.example'
 version = '0.0.2'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -16,6 +17,10 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+war {
+    baseName = 'springboot_jpa'
 }
 
 dependencies {
@@ -29,6 +34,8 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
 //        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 }
 

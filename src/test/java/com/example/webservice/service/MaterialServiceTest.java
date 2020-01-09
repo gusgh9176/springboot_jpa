@@ -1,8 +1,8 @@
 package com.example.webservice.service;
 
-import com.example.webservice.domain.posts.Posts;
-import com.example.webservice.domain.posts.PostsRepository;
-import com.example.webservice.dto.posts.PostsSaveRequestDto;
+import com.example.webservice.domain.materials.Materials;
+import com.example.webservice.domain.materials.MaterialsRepository;
+import com.example.webservice.dto.materials.MaterialsSaveRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,13 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostServiceTest {
+public class MaterialServiceTest {
 
     @Autowired
-    private PostsService postsService;
+    private MaterialsService postsService;
 
     @Autowired
-    private PostsRepository postsRepository;
+    private MaterialsRepository postsRepository;
 
     @After
     public void cleanup () {
@@ -31,7 +31,7 @@ public class PostServiceTest {
     @Test
     public void Dto데이터가_posts테이블에_저장된다 () {
         //given
-        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
+        MaterialsSaveRequestDto dto = MaterialsSaveRequestDto.builder()
                 .author("jojoldu@gmail.com")
                 .content("테스트")
                 .title("테스트 타이틀")
@@ -41,7 +41,7 @@ public class PostServiceTest {
         postsService.save(dto);
 
         //then
-        Posts posts = postsRepository.findAll().get(0);
+        Materials posts = postsRepository.findAll().get(0);
         assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(posts.getContent()).isEqualTo(dto.getContent());
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());

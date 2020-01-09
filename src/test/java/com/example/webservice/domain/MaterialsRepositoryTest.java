@@ -1,7 +1,7 @@
 package com.example.webservice.domain;
 
-import com.example.webservice.domain.posts.Posts;
-import com.example.webservice.domain.posts.PostsRepository;
+import com.example.webservice.domain.materials.Materials;
+import com.example.webservice.domain.materials.MaterialsRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +18,10 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostsRepositoryTest {
+public class MaterialsRepositoryTest {
 
     @Autowired
-    PostsRepository postsRepository;
+    MaterialsRepository postsRepository;
 
     @After
     public void cleanup() {
@@ -35,17 +35,17 @@ public class PostsRepositoryTest {
     @Test
     public void 게시글저장_불러오기() {
         //given
-        postsRepository.save(Posts.builder()
+        postsRepository.save(Materials.builder()
                 .title("test title")
                 .content("test content")
                 .author("jojoldu@gmail.com")
                 .build());
 
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Materials> postsList = postsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
+        Materials posts = postsList.get(0);
         assertThat(posts.getTitle(), is("test title"));
         assertThat(posts.getContent(), is("test content"));
     }
@@ -54,16 +54,16 @@ public class PostsRepositoryTest {
     public void BaseTimeEntity_등록 () {
         //given
         LocalDateTime now = LocalDateTime.now();
-        postsRepository.save(Posts.builder()
+        postsRepository.save(Materials.builder()
                 .title("테스트 게시글")
                 .content("테스트 본문")
                 .author("jojoldu@gmail.com")
                 .build());
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Materials> postsList = postsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
+        Materials posts = postsList.get(0);
         assertTrue(posts.getCreatedDate().isAfter(now));
         assertTrue(posts.getModifiedDate().isAfter(now));
     }

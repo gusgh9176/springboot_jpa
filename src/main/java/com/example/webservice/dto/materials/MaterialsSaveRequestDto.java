@@ -1,6 +1,6 @@
-package com.example.webservice.dto.posts;
+package com.example.webservice.dto.materials;
 
-import com.example.webservice.domain.posts.Posts;
+import com.example.webservice.domain.materials.Materials;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,21 +9,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostsSaveRequestDto {
+public class MaterialsSaveRequestDto {
 
     private String title;
     private String content;
     private String author;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author) {
+    public MaterialsSaveRequestDto(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    public Posts toEntity(){
-        return Posts.builder()
+    public Materials toEntity(){
+        return Materials.builder()
                 .title(title)
                 .content(content)
                 .author(author)
