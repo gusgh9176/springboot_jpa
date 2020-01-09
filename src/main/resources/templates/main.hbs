@@ -49,14 +49,14 @@
             </thead>
 
             <tbody id="tbodySkeleton">
-            {{#each posts}}
+            {{#each materials}}
                 <tr>
-                    <td class="classification">골조</td>
-                    <td class="item">SPF</td>
-                    <td class="standard">2x6" 12'</td>
-                    <td class="price">10,000원</td>
+                    <td class="classification{{id}}">{{classification}}</td>
+                    <td class="item{{id}}">{{item}}</td>
+                    <td class="standard{{id}}">{{standard}}</td>
+                    <td class="price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton">선택
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton{{id}}">선택
                         </button>
                     </td>
                 </tr>
