@@ -43,7 +43,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/posts',
+            url: '/materials',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)

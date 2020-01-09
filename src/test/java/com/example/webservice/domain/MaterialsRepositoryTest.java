@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class MaterialsRepositoryTest {
 
     @Autowired
-    MaterialsRepository postsRepository;
+    MaterialsRepository materialsRepository;
 
     @After
     public void cleanup() {
@@ -29,13 +29,13 @@ public class MaterialsRepositoryTest {
          이후 테스트 코드에 영향을 끼치지 않기 위해
          테스트 메소드가 끝날때 마다 respository 전체 비우는 코드
          **/
-        postsRepository.deleteAll();
+        materialsRepository.deleteAll();
     }
 
     @Test
     public void 게시글저장_불러오기() {
         //given
-        postsRepository.save(Materials.builder()
+        materialsRepository.save(Materials.builder()
                 .classification("test title")
                 .item("test content")
                 .standard("jojoldu@gmail.com")
@@ -43,7 +43,7 @@ public class MaterialsRepositoryTest {
                 .build());
 
         //when
-        List<Materials> postsList = postsRepository.findAll();
+        List<Materials> postsList = materialsRepository.findAll();
 
         //then
         Materials posts = postsList.get(0);
@@ -55,14 +55,14 @@ public class MaterialsRepositoryTest {
     public void BaseTimeEntity_등록 () {
         //given
         LocalDateTime now = LocalDateTime.now();
-        postsRepository.save(Materials.builder()
+        materialsRepository.save(Materials.builder()
                 .classification("테스트 게시글")
                 .item("테스트 본문")
                 .standard("jojoldu@gmail.com")
                 .price("10,000원")
                 .build());
         //when
-        List<Materials> postsList = postsRepository.findAll();
+        List<Materials> postsList = materialsRepository.findAll();
 
         //then
         Materials posts = postsList.get(0);

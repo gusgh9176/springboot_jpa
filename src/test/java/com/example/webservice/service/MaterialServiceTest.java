@@ -18,14 +18,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MaterialServiceTest {
 
     @Autowired
-    private MaterialsService postsService;
+    private MaterialsService materialsService;
 
     @Autowired
-    private MaterialsRepository postsRepository;
+    private MaterialsRepository materialsRepository;
 
     @After
     public void cleanup () {
-        postsRepository.deleteAll();
+        materialsRepository.deleteAll();
     }
 
     @Test
@@ -39,10 +39,10 @@ public class MaterialServiceTest {
                 .build();
 
         //when
-        postsService.save(dto);
+        materialsService.save(dto);
 
         //then
-        Materials posts = postsRepository.findAll().get(0);
+        Materials posts = materialsRepository.findAll().get(0);
         assertThat(posts.getPrice()).isEqualTo(dto.getPrice());
         assertThat(posts.getStandard()).isEqualTo(dto.getStandard());
         assertThat(posts.getItem()).isEqualTo(dto.getItem());
