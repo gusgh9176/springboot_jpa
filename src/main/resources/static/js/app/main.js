@@ -1,7 +1,6 @@
 var main = {
     init : function () {
         var _this = this;
-        var id = $('.classification').length;
         $('tbody').hide();
         $('#tbodySkeleton').show();
         $('#tbody-purchaseList').show();

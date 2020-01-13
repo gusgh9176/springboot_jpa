@@ -241,7 +241,6 @@ function material_click(s) {
 
 function change_count(e, id) {
     var price =document.getElementById('purchase_select'+id).getAttribute('value');
-    alert(price);
     var newPrice = e.value * parseInt(price);
     $('#purchaseList_price_id'+id).html(newPrice+"원");
     refresh_totalPrice();
