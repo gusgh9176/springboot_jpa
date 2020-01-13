@@ -13,7 +13,7 @@ public class MaterialsMainResponseDto {
     private String classification;
     private String item;
     private String standard;
-    private String price;
+    private Integer price;
     private String modifiedDate;
 
     public MaterialsMainResponseDto(Materials entity) {

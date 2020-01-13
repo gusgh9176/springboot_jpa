@@ -14,10 +14,10 @@ public class MaterialsSaveRequestDto {
     private String classification;
     private String item;
     private String standard;
-    private String price;
+    private Integer price;
 
     @Builder
-    public MaterialsSaveRequestDto(String classification, String item, String standard, String price) {
+    public MaterialsSaveRequestDto(String classification, String item, String standard, Integer price) {
         this.classification = classification;
         this.item = item;
         this.standard = standard;

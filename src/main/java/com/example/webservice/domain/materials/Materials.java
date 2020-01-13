@@ -28,10 +28,10 @@ public class Materials extends BaseTimeEntity {
     private String standard;
 
     @Column(nullable = false)
-    private String price;
+    private Integer price;
 
     @Builder
-    public Materials(String classification, String item, String standard, String price) {
+    public Materials(String classification, String item, String standard, Integer price) {
         this.classification = classification;
         this.item = item;
         this.standard = standard;
