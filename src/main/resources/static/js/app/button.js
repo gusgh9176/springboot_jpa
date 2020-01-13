@@ -48,8 +48,12 @@ function skeleton_click(s) {
     // 갯수td 태그 만들기, select, option 구조
     var td_count = document.createElement('td');
     var select_option = document.createElement('select');
+
     var select_option_att = document.createAttribute('class');
     select_option_att.value = "form-control";
+    var select_option_att2 = document.createAttribute('id');
+    select_option_att2.value = "purchase_select"+id;
+
     select_option.setAttributeNode(select_option_att);
 
     for(var i = 1; i<100; i++){
@@ -77,7 +81,7 @@ function skeleton_click(s) {
     var btn_delete_att = document.createAttribute('class');
     btn_delete_att.value = "btn btn-outline-secondary btn-sm";
     var btn_delete_att2 = document.createAttribute('onclick');
-    btn_delete_att2.value = "delete_skeleton("+id+","+price+")";
+    btn_delete_att2.value = "delete_skeleton("+id+")";
 
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
@@ -96,7 +100,7 @@ function skeleton_click(s) {
     tbody_area.appendChild(tr_area);
     id++;
     skeletonNext();
-    add_totalPrice(price);
+    refresh_totalPrice();
 }
 
 // 골조 외 품목 선택시
@@ -139,13 +143,27 @@ function material_click(s) {
     // 갯수td 태그 만들기, select, option 구조
     var td_count = document.createElement('td');
     var select_option = document.createElement('select');
+
     var select_option_att = document.createAttribute('class');
     select_option_att.value = "form-control";
+    var select_option_att2 = document.createAttribute('id');
+    select_option_att2.value = "purchase_select"+id;
+    var select_option_att3 = document.createAttribute('onchange');
+    select_option_att3.value = "change_count(this,"+price+")";
+    
     select_option.setAttributeNode(select_option_att);
+    select_option.setAttributeNode(select_option_att2);
+    select_option.setAttributeNode(select_option_att3);
 
     for(var i = 1; i<100; i++){
         var option_count = document.createElement('option');
         option_count.text = i;
+
+        var option_count_att = document.createAttribute('value');
+        option_count_att.value = i;
+
+        option_count.setAttributeNode(option_count_att);
+
         select_option.appendChild(option_count);
     }
 
@@ -168,7 +186,7 @@ function material_click(s) {
     var btn_delete_att = document.createAttribute('class');
     btn_delete_att.value = "btn btn-outline-secondary btn-sm";
     var btn_delete_att2 = document.createAttribute('onclick');
-    btn_delete_att2.value = "delete_material("+id+","+price+")";
+    btn_delete_att2.value = "delete_material("+id+")";
 
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
@@ -187,35 +205,41 @@ function material_click(s) {
     // 완성된 행 tbody 자식으로 넣어줌
     tbody_area.appendChild(tr_area);
     id++;
-    add_totalPrice(price);
+    refresh_totalPrice();
 }
 
-function add_totalPrice(newPrice) {
-    var priceArray = $('#totalPrice').text().split('원');
-    priceArray[0] = parseInt(priceArray[0]) + parseInt(newPrice);
-    $('#totalPrice').html(priceArray[0] + "원");
+function change_count(e, price) {
+    var newPrice = e.value * price
 }
 
-function minus_totalPrice(newPrice) {
-    var priceArray = $('#totalPrice').text().split('원');
-    priceArray[0] = parseInt(priceArray[0]) - parseInt(newPrice);
-    $('#totalPrice').html(priceArray[0] + "원");
+// 목록에서 선택시 총합 늘어남
+function refresh_totalPrice() {
+    var priceArray = document.getElementsByClassName("purchaseList_price");
+    var totalPrice = 0;
+    for(var i=0; i<priceArray.length; i++){
+        totalPrice = totalPrice + parseInt(priceArray.item(i).textContent.split("원")[0]);
+    }
+    $('#totalPrice').html(totalPrice + "원");
+
+    // var priceArray = $('#totalPrice').text().split('원');
+    // priceArray[0] = parseInt(priceArray[0]) + parseInt(newPrice);
+    // $('#totalPrice').html(priceArray[0] + "원");
 }
 
-// 삭제 버튼 클릭시 구매 목록에서 삭제
+// 삭제 버튼 클릭시 구매 목록에서 삭제, 총합 계산
 // 골조
-function delete_skeleton(id, price) {
+function delete_skeleton(id) {
     $('#purchaseList_skeleton'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
-    minus_totalPrice(price);
+    refresh_totalPrice();
     this.id--;
 };
 
 // 골조 외 품목
-function delete_material(id, price) {
+function delete_material(id) {
     $('#purchaseList_material'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
-    minus_totalPrice(price);
+    refresh_totalPrice();
     this.id--;
 };
 
