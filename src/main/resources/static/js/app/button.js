@@ -193,12 +193,14 @@ function material_click(s) {
 function delete_skeleton(id) {
     $('#purchaseList_skeleton'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
+    this.id--;
 };
 
 // 골조 외 품목
 function delete_material(id) {
     $('#purchaseList_material'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
+    this.id--;
 };
 
 // 골조 외 품목 선택시 구매목록에 추가하고 다음 목록으로 넘김
