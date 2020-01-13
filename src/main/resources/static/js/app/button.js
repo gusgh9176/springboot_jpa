@@ -7,7 +7,7 @@ function skeleton_click(s) {
     var classification = document.getElementById('td-classification'+s).textContent; // 선택한 분류 열 text 가져옴
     var item = document.getElementById('td-item'+s).textContent; // 선택한 아이템 열 text 가져옴
     var standard = document.getElementById('td-standard'+s).textContent; // 선택한 규격 열 text 가져옴
-    var price = document.getElementById('td-price'+s).textContent; // 선택한 가격 열 text 가져옴
+    var price = document.getElementById('td-price'+s).textContent.split('원')[0]; // 선택한 가격 열 text 가져옴
 
 
     // tr(행) 태그 만들기
@@ -63,7 +63,7 @@ function skeleton_click(s) {
 
     // 가격td 태그 만들기
     var td_price = document.createElement('td');
-    td_price.textContent = price;
+    td_price.textContent = price+"원";
 
     var td_price_att = document.createAttribute('class');
     td_price_att.value = "purchaseList_price";
@@ -77,7 +77,7 @@ function skeleton_click(s) {
     var btn_delete_att = document.createAttribute('class');
     btn_delete_att.value = "btn btn-outline-secondary btn-sm";
     var btn_delete_att2 = document.createAttribute('onclick');
-    btn_delete_att2.value = "delete_skeleton("+id+")";
+    btn_delete_att2.value = "delete_skeleton("+id+","+price+")";
 
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
@@ -96,6 +96,7 @@ function skeleton_click(s) {
     tbody_area.appendChild(tr_area);
     id++;
     skeletonNext();
+    add_totalPrice(price);
 }
 
 // 골조 외 품목 선택시
@@ -104,7 +105,7 @@ function material_click(s) {
     var classification = document.getElementById('td-classification'+s).textContent; // 선택한 분류 열 text 가져옴
     var item = document.getElementById('td-item'+s).textContent; // 선택한 아이템 열 text 가져옴
     var standard = document.getElementById('td-standard'+s).textContent; // 선택한 규격 열 text 가져옴
-    var price = document.getElementById('td-price'+s).textContent; // 선택한 가격 열 text 가져옴
+    var price = document.getElementById('td-price'+s).textContent.split('원')[0]; // 선택한 가격 열 text 가져옴
 
     // tr(행) 태그 만들기
     var tr_area = document.createElement('tr');
@@ -153,7 +154,7 @@ function material_click(s) {
 
     // 가격td 태그 만들기
     var td_price = document.createElement('td');
-    td_price.textContent = price;
+    td_price.textContent = price+"원";
 
     var td_price_att = document.createAttribute('class');
     td_price_att.value = "purchaseList_price";
@@ -167,7 +168,7 @@ function material_click(s) {
     var btn_delete_att = document.createAttribute('class');
     btn_delete_att.value = "btn btn-outline-secondary btn-sm";
     var btn_delete_att2 = document.createAttribute('onclick');
-    btn_delete_att2.value = "delete_material("+id+")";
+    btn_delete_att2.value = "delete_material("+id+","+price+")";
 
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
@@ -186,20 +187,35 @@ function material_click(s) {
     // 완성된 행 tbody 자식으로 넣어줌
     tbody_area.appendChild(tr_area);
     id++;
+    add_totalPrice(price);
+}
+
+function add_totalPrice(newPrice) {
+    var priceArray = $('#totalPrice').text().split('원');
+    priceArray[0] = parseInt(priceArray[0]) + parseInt(newPrice);
+    $('#totalPrice').html(priceArray[0] + "원");
+}
+
+function minus_totalPrice(newPrice) {
+    var priceArray = $('#totalPrice').text().split('원');
+    priceArray[0] = parseInt(priceArray[0]) - parseInt(newPrice);
+    $('#totalPrice').html(priceArray[0] + "원");
 }
 
 // 삭제 버튼 클릭시 구매 목록에서 삭제
 // 골조
-function delete_skeleton(id) {
+function delete_skeleton(id, price) {
     $('#purchaseList_skeleton'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
+    minus_totalPrice(price);
     this.id--;
 };
 
 // 골조 외 품목
-function delete_material(id) {
+function delete_material(id, price) {
     $('#purchaseList_material'+id).remove();
     alert("구매목록에서 삭제되었습니다.");
+    minus_totalPrice(price);
     this.id--;
 };
 
