@@ -1,6 +1,8 @@
 var id = 1; // 가격 목록에서 tr을 분류하는데 쓸 새로운 값
 var tbody_area = document.getElementById('tbody-purchaseList'); // 가격 목록의 tbody 태그를 반환
 
+// 좌측에 있는 목록에서 선택할 때 우측 구매목록에 뜨게 하는 함수
+// 골조 선택시
 function skeleton_click(s) {
     var classification = document.getElementById('td-classification'+s).textContent; // 선택한 분류 열 text 가져옴
     var item = document.getElementById('td-item'+s).textContent; // 선택한 아이템 열 text 가져옴
@@ -24,7 +26,7 @@ function skeleton_click(s) {
     var td_classification_att = document.createAttribute('class');
     td_classification_att.value = "firstColumn";
 
-    // 차이점
+    // material_click()과 차이점
     var td_classification_att2 = document.createAttribute('colspan');
     td_classification_att2.value = "2";
     //
@@ -68,15 +70,19 @@ function skeleton_click(s) {
 
     td_price.setAttributeNode(td_price_att);
 
-    var tr_delete = document.createElement('button');
-    tr_delete.textContent = "삭제";
+    // 삭제 버튼 만들기
+    var btn_delete = document.createElement('button');
+    btn_delete.textContent = "삭제";
 
-    var tr_delete_att = document.createAttribute('class');
-    tr_delete_att.value = "btn btn-outline-secondary btn-sm";
+    var btn_delete_att = document.createAttribute('class');
+    btn_delete_att.value = "btn btn-outline-secondary btn-sm";
+    var btn_delete_att2 = document.createAttribute('onclick');
+    btn_delete_att2.value = "delete_skeleton("+id+")";
 
-    tr_delete.setAttributeNode(tr_delete_att);
+    btn_delete.setAttributeNode(btn_delete_att);
+    btn_delete.setAttributeNode(btn_delete_att2);
 
-    td_price.appendChild(tr_delete);
+    td_price.appendChild(btn_delete);
 
 
     // 만든 td(열) tr(행)에 자식으로 넣어줌
@@ -89,9 +95,10 @@ function skeleton_click(s) {
     // 완성된 행 tbody 자식으로 넣어줌
     tbody_area.appendChild(tr_area);
     id++;
-    skeltonNext();
+    skeletonNext();
 }
 
+// 골조 외 품목 선택시
 function material_click(s) {
 
     var classification = document.getElementById('td-classification'+s).textContent; // 선택한 분류 열 text 가져옴
@@ -153,15 +160,19 @@ function material_click(s) {
 
     td_price.setAttributeNode(td_price_att);
 
-    var tr_delete = document.createElement('button');
-    tr_delete.textContent = "삭제";
+    // 삭제 버튼 만들기
+    var btn_delete = document.createElement('button');
+    btn_delete.textContent = "삭제";
 
-    var tr_delete_att = document.createAttribute('class');
-    tr_delete_att.value = "btn btn-outline-secondary btn-sm";
+    var btn_delete_att = document.createAttribute('class');
+    btn_delete_att.value = "btn btn-outline-secondary btn-sm";
+    var btn_delete_att2 = document.createAttribute('onclick');
+    btn_delete_att2.value = "delete_material("+id+")";
 
-    tr_delete.setAttributeNode(tr_delete_att);
+    btn_delete.setAttributeNode(btn_delete_att);
+    btn_delete.setAttributeNode(btn_delete_att2);
 
-    td_price.appendChild(tr_delete);
+    td_price.appendChild(btn_delete);
 
 
     // 만든 td(열) tr(행)에 자식으로 넣어줌
@@ -177,6 +188,20 @@ function material_click(s) {
     id++;
 }
 
+// 삭제 버튼 클릭시 구매 목록에서 삭제
+// 골조
+function delete_skeleton(id) {
+    $('#purchaseList_skeleton'+id).remove();
+    alert("구매목록에서 삭제되었습니다.");
+};
+
+// 골조 외 품목
+function delete_material(id) {
+    $('#purchaseList_material'+id).remove();
+    alert("구매목록에서 삭제되었습니다.");
+};
+
+// 골조 외 품목 선택시 구매목록에 추가하고 다음 목록으로 넘김
 function insulation_click(s) {
     material_click(s);
     insulationNext();
@@ -197,7 +222,8 @@ function window_click(s) {
     windowNext();
 }
 
-function skeltonNext() {
+// 선택 버튼 클릭 시 현재 목록 숨기고 다음 목록 보이게 함
+function skeletonNext() {
     $('#tbodySkeleton').hide();
     $('#tbodyInsulation').show();
 }
@@ -220,4 +246,5 @@ function interiorNext() {
 function windowNext() {
     $('#tbodyWindow').hide();
     $('#tbodySkeleton').show();
+    alert("선택이 완료되었습니다.")
 }
