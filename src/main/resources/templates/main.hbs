@@ -17,7 +17,7 @@
             text-align: center;
         }
 
-        #price {
+        #totalPrice {
             text-align: right;
         }
 
@@ -30,9 +30,7 @@
 <body>
 <h1>견적</h1>
 <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-        data-target="#savePostsModal">추가</button>
-<button type="button" class="btn btn-primary btn-sm" id="btn-test2">숨기기</button>
-<button type="button" class="btn btn-primary btn-sm" id="btn-test">보이기</button>
+        data-target="#savePostsModal">재료 추가</button>
 <br/>
 <div class="row">
     <div class="col-md-5">
@@ -49,26 +47,14 @@
             </thead>
 
             <tbody id="tbodySkeleton">
-            {{#each materials}}
+            {{#each skeletons}}
                 <tr>
-                    <td id="classification{{id}}">{{classification}}</td>
-                    <td id="item{{id}}">{{item}}</td>
-                    <td id="standard{{id}}">{{standard}}</td>
-                    <td id="price{{id}}">{{price}}</td>
+                    <td id="td-classification{{id}}">{{classification}}</td>
+                    <td id="td-item{{id}}">{{item}}</td>
+                    <td id="td-standard{{id}}">{{standard}}</td>
+                    <td id="td-price{{id}}">{{price}}</td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton{{id}}" onclick="skeleton_click({{id}})">선택
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
-            {{#each posts}}
-                <tr>
-                    <td class="classification">골조</td>
-                    <td class="item">SPF</td>
-                    <td class="standard">2x6" 12'</td>
-                    <td class="price">10,000원</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton">선택
                         </button>
                     </td>
                 </tr>
@@ -76,14 +62,14 @@
             </tbody>
 
             <tbody id="tbodyInsulation">
-            {{#each posts}}
+            {{#each insulations}}
                 <tr>
-                    <td>단열</td>
-                    <td>ICYENE ProSeal HFO</td>
-                    <td>100T</td>
-                    <td>35,000원</td>
+                    <td id="td-classification{{id}}">{{classification}}</td>
+                    <td id="td-item{{id}}">{{item}}</td>
+                    <td id="td-standard{{id}}">{{standard}}</td>
+                    <td id="td-price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-insulation">추가
+                        <button type="button" class="btn btn-info btn-sm" id="btn-insulation{{id}}" onclick="insulation_click({{id}})">추가
                         </button>
                     </td>
                 </tr>
@@ -91,14 +77,14 @@
             </tbody>
 
             <tbody id="tbodyExterior">
-            {{#each posts}}
+            {{#each exteriors}}
                 <tr>
-                    <td>외장마감</td>
-                    <td>웨더그루브 내추럴</td>
-                    <td>9.5T</td>
-                    <td>30,000원</td>
+                    <td id="td-classification{{id}}">{{classification}}</td>
+                    <td id="td-item{{id}}">{{item}}</td>
+                    <td id="td-standard{{id}}">{{standard}}</td>
+                    <td id="td-price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-exterior">추가
+                        <button type="button" class="btn btn-info btn-sm" id="btn-exterior{{id}}" onclick="exterior_click({{id}})">추가
                         </button>
                     </td>
                 </tr>
@@ -106,14 +92,14 @@
             </tbody>
 
             <tbody id="tbodyInterior">
-            {{#each posts}}
+            {{#each interiors}}
                 <tr>
-                    <td>내장마감</td>
-                    <td>ICYENE ProSeal HFO</td>
-                    <td>100T</td>
-                    <td>35,000원</td>
+                    <td id="td-classification{{id}}">{{classification}}</td>
+                    <td id="td-item{{id}}">{{item}}</td>
+                    <td id="td-standard{{id}}">{{standard}}</td>
+                    <td id="td-price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-interior">추가
+                        <button type="button" class="btn btn-info btn-sm" id="btn-interior{{id}}" onclick="interior_click({{id}})">추가
                         </button>
                     </td>
                 </tr>
@@ -121,15 +107,14 @@
             </tbody>
 
             <tbody id="tbodyWindow">
-            {{#each posts}}
+            {{#each windows}}
                 <tr>
-                    <td>창호</td>
-                    <td>ICYENE ProSeal HFO</td>
-                    <td>100T</td>
-                    <!-- <td>{{author}}</td> -->
-                    <td>35,000원</td>
+                    <td id="td-classification{{id}}">{{classification}}</td>
+                    <td id="td-item{{id}}">{{item}}</td>
+                    <td id="td-standard{{id}}">{{standard}}</td>
+                    <td id="td-price{{id}}">{{price}}</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm" id="btn-window">완료
+                        <button type="button" class="btn btn-success btn-sm" id="btn-window{{id}}" onclick="window_click({{id}})">완료
                         </button>
                     </td>
                 </tr>
@@ -208,7 +193,7 @@
             <tfoot>
             <tr>
                 <td>총합</td>
-                <td colspan="5">20,000원</td>
+                <td id="totalPrice" colspan="5">20,000원</td>
             </tr>
             </tfoot>
         </table>
@@ -232,16 +217,20 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="title">제목</label>
-                        <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+                        <label for="classification">분류</label>
+                        <input type="text" class="form-control" id="classification" placeholder="분류를 입력하세요">
                     </div>
                     <div class="form-group">
-                        <label for="author"> 작성자 </label>
-                        <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+                        <label for="item"> 품목 </label>
+                        <input type="text" class="form-control" id="item" placeholder="품목을 입력하세요">
                     </div>
                     <div class="form-group">
-                        <label for="content"> 내용 </label>
-                        <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+                        <label for="standard"> 규격 </label>
+                        <input type="text" class="form-control" id="standard" placeholder="규격을 입력하세요"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="price"> 단가 </label>
+                        <input type="text" class="form-control" id="price" placeholder="숫자만 입력해주세요"></input>
                     </div>
                 </form>
             </div>
@@ -259,7 +248,7 @@
 
 <!--custom js 추가-->
 <script src="/js/app/main.js?ver=3"></script>
-<script src="/js/app/button.js?ver=1"></script>
+<script src="/js/app/button.js?ver=2"></script>
 
 </body>
 </html>

@@ -14,6 +14,12 @@ public class WebController {
 
     @GetMapping("/")
     public String main(Model model) {
+        model.addAttribute("skeletons", materialsService.findSkeleton());
+        model.addAttribute("insulations", materialsService.findInsulation());
+        model.addAttribute("exteriors", materialsService.findExterior());
+        model.addAttribute("interiors", materialsService.findInterior());
+        model.addAttribute("windows", materialsService.findWindow());
+
         model.addAttribute("materials", materialsService.findAllDesc());
         return "main";
     }

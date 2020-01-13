@@ -26,4 +26,39 @@ public class MaterialsService {
                 .map(MaterialsMainResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<MaterialsMainResponseDto> findSkeleton() {
+        return materialsRepository.findSkeleton()
+                .map(MaterialsMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MaterialsMainResponseDto> findInsulation() {
+        return materialsRepository.findInsulation()
+                .map(MaterialsMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MaterialsMainResponseDto> findExterior() {
+        return materialsRepository.findExterior()
+                .map(MaterialsMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MaterialsMainResponseDto> findInterior() {
+        return materialsRepository.findInterior()
+                .map(MaterialsMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MaterialsMainResponseDto> findWindow() {
+        return materialsRepository.findWindow()
+                .map(MaterialsMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
