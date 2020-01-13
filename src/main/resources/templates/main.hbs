@@ -30,7 +30,7 @@
 <body>
 <h1>견적</h1>
 <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-        data-target="#savePostsModal">재료 추가</button>
+        data-target="#saveMaterialsModal">재료 추가</button>
 <br/>
 <div class="row">
     <div class="col-md-5">
@@ -139,56 +139,8 @@
             </tr>
             </thead>
 
-
             <tbody id="tbody-purchaseList">
-            <tr>
-                <td class="firstColumn" colspan="2">n번째 골조</td>
-                <td>SPF</td>
-                <td>2x6" 12'</td>
-                <td>
-                    <select class="form-control">
-                        <option>1</option>
-                    </select>
-                </td>
-                <td>10,000원
-                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="firstColumn" width="5%"></td>
-                <td>단열</td>
-                <td>ICYENE ProSeal HFO</td>
-                <td>2x6" 12'</td>
-                <td>
-                    <select class="form-control">
-                        <option>1</option>
-                    </select>
-                </td>
-                <td>10,000원
-                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="firstColumn"></td>
-                <td>외장마감</td>
-                <td>웨더그루브 내추럴</td>
-                <td>9.5T</td>
-                <td>
-                    <select class="form-control">
-                        <option>1</option>
-                    </select>
-                </td>
-                <td>10,000원
-                    <button type="button" class="btn btn-outline-secondary btn-sm">삭제
-                    </button>
-                </td>
-            </tr>
             </tbody>
-
 
             <tfoot>
             <tr>
@@ -198,18 +150,16 @@
             </tfoot>
         </table>
     </div>
-
-
 </div>
 
 
 <!-- Modal 영역 -->
-<div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel"
+<div class="modal fade" id="saveMaterialsModal" tabindex="-1" role="dialog" aria-labelledby="saveMaterialsLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="savePostsLabel">등록</h5>
+                <h5 class="modal-title" id="saveMaterialsLabel">등록</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -226,11 +176,11 @@
                     </div>
                     <div class="form-group">
                         <label for="standard"> 규격 </label>
-                        <input type="text" class="form-control" id="standard" placeholder="규격을 입력하세요"></input>
+                        <input type="text" class="form-control" id="standard" placeholder="규격을 입력하세요">
                     </div>
                     <div class="form-group">
                         <label for="price"> 단가 </label>
-                        <input type="text" class="form-control" id="price" placeholder="숫자만 입력해주세요"></input>
+                        <input type="text" class="form-control" id="price" placeholder="숫자만 입력해주세요">
                     </div>
                 </form>
             </div>
@@ -247,7 +197,7 @@
 <script src="/js/lib/bootstrap.min.js"></script>
 
 <!--custom js 추가-->
-<script src="/js/app/main.js?ver=3"></script>
+<script src="/js/app/main.js?ver=5"></script>
 <script src="/js/app/button.js?ver=2"></script>
 
 </body>
