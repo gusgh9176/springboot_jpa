@@ -21,13 +21,13 @@ public class Materials extends BaseTimeEntity {
     @Column(length = 500, nullable = false)
     private String classification;
 
-    @Column()
+    @Column(nullable = false)
     private String item;
 
-    @Column()
+    @Column(nullable = false)
     private String standard;
 
-    @Column()
+    @Column(nullable = false)
     private String price;
 
     @Builder
