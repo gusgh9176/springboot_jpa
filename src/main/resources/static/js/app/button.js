@@ -53,12 +53,25 @@ function skeleton_click(s) {
     select_option_att.value = "form-control";
     var select_option_att2 = document.createAttribute('id');
     select_option_att2.value = "purchase_select"+id;
+    var select_option_att3 = document.createAttribute('value');
+    select_option_att3.value = price;
+    var select_option_att4 = document.createAttribute('onchange');
+    select_option_att4.value = "change_count(this,"+id+")";
 
     select_option.setAttributeNode(select_option_att);
+    select_option.setAttributeNode(select_option_att2);
+    select_option.setAttributeNode(select_option_att3);
+    select_option.setAttributeNode(select_option_att4);
 
     for(var i = 1; i<100; i++){
         var option_count = document.createElement('option');
         option_count.text = i;
+
+        var option_count_att = document.createAttribute('value');
+        option_count_att.value = i;
+
+        option_count.setAttributeNode(option_count_att);
+
         select_option.appendChild(option_count);
     }
 
@@ -71,8 +84,14 @@ function skeleton_click(s) {
 
     var td_price_att = document.createAttribute('class');
     td_price_att.value = "purchaseList_price";
+    var td_price_att2 = document.createAttribute('id');
+    td_price_att2.value = "purchaseList_price_id"+id;
 
     td_price.setAttributeNode(td_price_att);
+    td_price.setAttributeNode(td_price_att2);
+
+    // 삭제버튼td 태그 만들기
+    var td_delete = document.createElement('td');
 
     // 삭제 버튼 만들기
     var btn_delete = document.createElement('button');
@@ -86,7 +105,7 @@ function skeleton_click(s) {
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
 
-    td_price.appendChild(btn_delete);
+    td_delete.appendChild(btn_delete);
 
 
     // 만든 td(열) tr(행)에 자식으로 넣어줌
@@ -95,6 +114,7 @@ function skeleton_click(s) {
     tr_area.appendChild(td_standard);
     tr_area.appendChild(td_count);
     tr_area.appendChild(td_price);
+    tr_area.appendChild(td_delete);
 
     // 완성된 행 tbody 자식으로 넣어줌
     tbody_area.appendChild(tr_area);
@@ -148,13 +168,17 @@ function material_click(s) {
     select_option_att.value = "form-control";
     var select_option_att2 = document.createAttribute('id');
     select_option_att2.value = "purchase_select"+id;
-    var select_option_att3 = document.createAttribute('onchange');
-    select_option_att3.value = "change_count(this,"+price+")";
+    var select_option_att3 = document.createAttribute('value');
+    select_option_att3.value = price;
+    var select_option_att4 = document.createAttribute('onchange');
+    select_option_att4.value = "change_count(this,"+id+")";
     
     select_option.setAttributeNode(select_option_att);
     select_option.setAttributeNode(select_option_att2);
     select_option.setAttributeNode(select_option_att3);
+    select_option.setAttributeNode(select_option_att4);
 
+    // option 개수
     for(var i = 1; i<100; i++){
         var option_count = document.createElement('option');
         option_count.text = i;
@@ -176,8 +200,14 @@ function material_click(s) {
 
     var td_price_att = document.createAttribute('class');
     td_price_att.value = "purchaseList_price";
+    var td_price_att2 = document.createAttribute('id');
+    td_price_att2.value = "purchaseList_price_id"+id;
 
     td_price.setAttributeNode(td_price_att);
+    td_price.setAttributeNode(td_price_att2);
+
+    // 삭제버튼td 태그 만들기
+    var td_delete = document.createElement('td');
 
     // 삭제 버튼 만들기
     var btn_delete = document.createElement('button');
@@ -191,7 +221,7 @@ function material_click(s) {
     btn_delete.setAttributeNode(btn_delete_att);
     btn_delete.setAttributeNode(btn_delete_att2);
 
-    td_price.appendChild(btn_delete);
+    td_delete.appendChild(btn_delete);
 
 
     // 만든 td(열) tr(행)에 자식으로 넣어줌
@@ -201,6 +231,7 @@ function material_click(s) {
     tr_area.appendChild(td_standard);
     tr_area.appendChild(td_count);
     tr_area.appendChild(td_price);
+    tr_area.appendChild(td_delete);
 
     // 완성된 행 tbody 자식으로 넣어줌
     tbody_area.appendChild(tr_area);
@@ -208,8 +239,12 @@ function material_click(s) {
     refresh_totalPrice();
 }
 
-function change_count(e, price) {
-    var newPrice = e.value * price
+function change_count(e, id) {
+    var price =document.getElementById('purchase_select'+id).getAttribute('value');
+    alert(price);
+    var newPrice = e.value * parseInt(price);
+    $('#purchaseList_price_id'+id).html(newPrice+"원");
+    refresh_totalPrice();
 }
 
 // 목록에서 선택시 총합 늘어남
@@ -220,10 +255,6 @@ function refresh_totalPrice() {
         totalPrice = totalPrice + parseInt(priceArray.item(i).textContent.split("원")[0]);
     }
     $('#totalPrice').html(totalPrice + "원");
-
-    // var priceArray = $('#totalPrice').text().split('원');
-    // priceArray[0] = parseInt(priceArray[0]) + parseInt(newPrice);
-    // $('#totalPrice').html(priceArray[0] + "원");
 }
 
 // 삭제 버튼 클릭시 구매 목록에서 삭제, 총합 계산
