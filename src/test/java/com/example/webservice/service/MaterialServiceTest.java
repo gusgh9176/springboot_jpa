@@ -32,7 +32,7 @@ public class MaterialServiceTest {
     public void Dto데이터가_posts테이블에_저장된다 () {
         //given
         MaterialsSaveRequestDto dto = MaterialsSaveRequestDto.builder()
-                .price("10,000원")
+                .price(10000)
                 .standard("jojoldu@gmail.com")
                 .item("테스트")
                 .classification("테스트 타이틀")

@@ -39,7 +39,7 @@ public class MaterialsRepositoryTest {
                 .classification("test title")
                 .item("test content")
                 .standard("jojoldu@gmail.com")
-                .price("10,000원")
+                .price(10000)
                 .build());
 
         //when
@@ -59,7 +59,7 @@ public class MaterialsRepositoryTest {
                 .classification("테스트 게시글")
                 .item("테스트 본문")
                 .standard("jojoldu@gmail.com")
-                .price("10,000원")
+                .price(10000)
                 .build());
         //when
         List<Materials> postsList = materialsRepository.findAll();
