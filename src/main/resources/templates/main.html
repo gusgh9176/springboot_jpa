@@ -160,6 +160,7 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <input type="hidden" id="csrf-token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <div class="form-group">
                         <label for="classification">분류</label>
                         <input type="text" class="form-control" id="classification" placeholder="분류를 입력하세요">

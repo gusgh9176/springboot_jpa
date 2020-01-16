@@ -10,6 +10,7 @@ var main = {
         });
     },
     save : function () {
+        var token = $('input#csrf-token').attr("value");
         var data = {
             classification: $('#classification').val(),
             item: $('#item').val(),
@@ -22,7 +23,10 @@ var main = {
             url: '/materials',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (request) {
+                request.setRequestHeader("X-CSRF-TOKEN",token)
+            }
         }).done(function() {
             alert('글이 등록되었습니다.');
             location.reload();
