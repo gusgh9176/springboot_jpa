@@ -26,9 +26,16 @@ public class MemberController {
     // 회원가입 처리
     @PostMapping("/user/signup")
     public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
+        if(memberService.joinUser(memberDto)== (long)-1){
+            return "redirect:/user/signupFailure";
+        }
         return "redirect:/user/login";
+    }
+
+    // 회원가입 실패 페이지
+    @GetMapping("/user/signupFailure")
+    public String dispSignupFailure() {
+        return "/signupFailure";
     }
 
     // 로그인 페이지

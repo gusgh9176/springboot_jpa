@@ -27,6 +27,12 @@ public class MemberService implements UserDetailsService {
 
     @Transactional
     public Long joinUser(MemberDto memberDto) {
+        // null이 아니라면 true 반환함, 중복 아이디 있다면 db에 추가 안함
+        if(memberRepository.findByEmail(memberDto.getEmail()).isPresent()){
+            System.out.println("현재 디비에 저장된 것"+memberRepository.findByEmail(memberDto.getEmail()));
+            return (long)-1;
+        }
+
         // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
