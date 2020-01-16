@@ -20,7 +20,6 @@ public class WebController {
         model.addAttribute("interiors", materialsService.findInterior());
         model.addAttribute("windows", materialsService.findWindow());
 
-        model.addAttribute("materials", materialsService.findAllDesc());
         return "main";
     }
 
