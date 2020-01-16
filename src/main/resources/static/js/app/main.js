@@ -1,9 +1,11 @@
 var main = {
     init : function () {
         var _this = this;
-        $('tbody').hide();
-        $('#tbodySkeleton').show();
-        $('#tbody-purchaseList').show();
+        $('#tbodyInsulation').hide();
+        $('#tbodyExterior').hide();
+        $('#tbodyInterior').hide();
+        $('#tbodyWindow').hide();
+        
 
         $('#btn-save').on('click', function () {
             _this.save();
@@ -20,7 +22,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/materials',
+            url: '/materials/insert',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -28,7 +30,29 @@ var main = {
                 request.setRequestHeader("X-CSRF-TOKEN",token)
             }
         }).done(function() {
-            alert('글이 등록되었습니다.');
+            alert('재료가 등록되었습니다.');
+            location.reload();
+        }).fail(function () {
+            alert("잘못된 입력입니다.");
+        });
+    },
+    delete : function () {
+        var token = $('input#csrf-token').attr("value");
+        var data = {
+            id: $('#id').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/materials/delete',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            beforeSend: function (request) {
+                request.setRequestHeader("X-CSRF-TOKEN",token)
+            }
+        }).done(function() {
+            alert('재료가 삭제되었습니다.');
             location.reload();
         }).fail(function (error) {
             alert(error);
