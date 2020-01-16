@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>스프링부트 웹서비스</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -29,9 +29,13 @@
 </head>
 <body>
 <h1>견적</h1>
-<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+<button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
         data-target="#saveMaterialsModal">재료 추가</button>
 <br/>
+<a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+<a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
 <div class="row">
     <div class="col-md-5">
         <!-- 목록 출력 영역 -->
@@ -47,78 +51,68 @@
             </thead>
 
             <tbody id="tbodySkeleton">
-            {{#each skeletons}}
-                <tr>
-                    <td id="td-classification{{id}}">{{classification}}</td>
-                    <td id="td-item{{id}}">{{item}}</td>
-                    <td id="td-standard{{id}}">{{standard}}</td>
-                    <td id="td-price{{id}}">{{price}}원</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-skeleton{{id}}" onclick="skeleton_click({{id}})">선택
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
+            <tr th:each="obj: ${skeletons}">
+                <td th:id="'td-classification' + ${obj.id}" th:text="${obj.classification}"></td>
+                <td th:id="'td-item' + ${obj.id}" th:text="${obj.item}"></td>
+                <td th:id="'td-standard' + ${obj.id}" th:text="${obj.standard}"></td>
+                <td th:id="'td-price' + ${obj.id}" th:text="${obj.price} +'원'"></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" th:id="'btn-skeleton' + ${obj.id}" th:onclick="'skeleton_click(' + ${obj.id} + ')'">선택
+                    </button>
+                </td>
+            </tr>
             </tbody>
 
             <tbody id="tbodyInsulation">
-            {{#each insulations}}
-                <tr>
-                    <td id="td-classification{{id}}">{{classification}}</td>
-                    <td id="td-item{{id}}">{{item}}</td>
-                    <td id="td-standard{{id}}">{{standard}}</td>
-                    <td id="td-price{{id}}">{{price}}원</td>
-                    <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-insulation{{id}}" onclick="insulation_click({{id}})">추가
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
+            <tr th:each="obj: ${insulations}">
+                <td th:id="'td-classification' + ${obj.id}" th:text="${obj.classification}"></td>
+                <td th:id="'td-item' + ${obj.id}" th:text="${obj.item}"></td>
+                <td th:id="'td-standard' + ${obj.id}" th:text="${obj.standard}"></td>
+                <td th:id="'td-price' + ${obj.id}" th:text="${obj.price} +'원'"></td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm" th:id="'btn-insulation' + ${obj.id}" th:onclick="'insulation_click(' + ${obj.id} + ')'">추가
+                    </button>
+                </td>
+            </tr>
             </tbody>
 
             <tbody id="tbodyExterior">
-            {{#each exteriors}}
-                <tr>
-                    <td id="td-classification{{id}}">{{classification}}</td>
-                    <td id="td-item{{id}}">{{item}}</td>
-                    <td id="td-standard{{id}}">{{standard}}</td>
-                    <td id="td-price{{id}}">{{price}}원</td>
-                    <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-exterior{{id}}" onclick="exterior_click({{id}})">추가
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
+            <tr th:each="obj: ${exteriors}">
+                <td th:id="'td-classification' + ${obj.id}" th:text="${obj.classification}"></td>
+                <td th:id="'td-item' + ${obj.id}" th:text="${obj.item}"></td>
+                <td th:id="'td-standard' + ${obj.id}" th:text="${obj.standard}"></td>
+                <td th:id="'td-price' + ${obj.id}" th:text="${obj.price} +'원'"></td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm" th:id="'btn-exterior' + ${obj.id}" th:onclick="'exterior_click(' + ${obj.id} + ')'">추가
+                    </button>
+                </td>
+            </tr>
             </tbody>
 
             <tbody id="tbodyInterior">
-            {{#each interiors}}
-                <tr>
-                    <td id="td-classification{{id}}">{{classification}}</td>
-                    <td id="td-item{{id}}">{{item}}</td>
-                    <td id="td-standard{{id}}">{{standard}}</td>
-                    <td id="td-price{{id}}">{{price}}원</td>
-                    <td>
-                        <button type="button" class="btn btn-info btn-sm" id="btn-interior{{id}}" onclick="interior_click({{id}})">추가
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
+            <tr th:each="obj: ${interiors}">
+                <td th:id="'td-classification' + ${obj.id}" th:text="${obj.classification}"></td>
+                <td th:id="'td-item' + ${obj.id}" th:text="${obj.item}"></td>
+                <td th:id="'td-standard' + ${obj.id}" th:text="${obj.standard}"></td>
+                <td th:id="'td-price' + ${obj.id}" th:text="${obj.price} +'원'"></td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm" th:id="'btn-interior' + ${obj.id}" th:onclick="'interior_click(' + ${obj.id} + ')'">추가
+                    </button>
+                </td>
+            </tr>
             </tbody>
 
             <tbody id="tbodyWindow">
-            {{#each windows}}
-                <tr>
-                    <td id="td-classification{{id}}">{{classification}}</td>
-                    <td id="td-item{{id}}">{{item}}</td>
-                    <td id="td-standard{{id}}">{{standard}}</td>
-                    <td id="td-price{{id}}">{{price}}원</td>
-                    <td>
-                        <button type="button" class="btn btn-success btn-sm" id="btn-window{{id}}" onclick="window_click({{id}})">완료
-                        </button>
-                    </td>
-                </tr>
-            {{/each}}
+            <tr th:each="obj: ${windows}">
+                <td th:id="'td-classification' + ${obj.id}" th:text="${obj.classification}"></td>
+                <td th:id="'td-item' + ${obj.id}" th:text="${obj.item}"></td>
+                <td th:id="'td-standard' + ${obj.id}" th:text="${obj.standard}"></td>
+                <td th:id="'td-price' + ${obj.id}" th:text="${obj.price} +'원'"></td>
+                <td>
+                    <button type="button" class="btn btn-success btn-sm" th:id="'btn-window' + ${obj.id}" th:onclick="'window_click(' + ${obj.id} + ')'">완료
+                    </button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
