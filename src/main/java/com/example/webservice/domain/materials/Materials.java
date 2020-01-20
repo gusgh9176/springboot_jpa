@@ -37,4 +37,5 @@ public class Materials extends BaseTimeEntity {
         this.standard = standard;
         this.price = price;
     }
+
 }

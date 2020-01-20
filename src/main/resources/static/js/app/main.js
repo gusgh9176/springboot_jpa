@@ -5,10 +5,14 @@ var main = {
         $('#tbodyExterior').hide();
         $('#tbodyInterior').hide();
         $('#tbodyWindow').hide();
-        
+
 
         $('#btn-save').on('click', function () {
             _this.save();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
         });
     },
     save : function () {
@@ -39,7 +43,7 @@ var main = {
     delete : function () {
         var token = $('input#csrf-token').attr("value");
         var data = {
-            id: $('#id').val()
+            id: $('#deleteId').val()
         };
 
         $.ajax({
