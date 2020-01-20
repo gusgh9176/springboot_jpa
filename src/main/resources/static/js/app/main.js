@@ -58,8 +58,8 @@ var main = {
         }).done(function() {
             alert('재료가 삭제되었습니다.');
             location.reload();
-        }).fail(function (error) {
-            alert(error);
+        }).fail(function () {
+            alert("잘못된 Id 값이 입력되었습니다.");
         });
     }
 };
