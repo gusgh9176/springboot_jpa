@@ -29,23 +29,23 @@ public class MaterialServiceTest {
     }
 
     @Test
-    public void Dto데이터가_posts테이블에_저장된다 () {
+    public void Dto데이터가_materials테이블에_저장된다 () {
         //given
         MaterialsSaveRequestDto dto = MaterialsSaveRequestDto.builder()
                 .price(10000)
-                .standard("jojoldu@gmail.com")
+                .standard("2.7m")
                 .item("테스트")
-                .classification("테스트 타이틀")
+                .classification("테스트 품목")
                 .build();
 
         //when
         materialsService.save(dto);
 
         //then
-        Materials posts = materialsRepository.findAll().get(0);
-        assertThat(posts.getPrice()).isEqualTo(dto.getPrice());
-        assertThat(posts.getStandard()).isEqualTo(dto.getStandard());
-        assertThat(posts.getItem()).isEqualTo(dto.getItem());
-        assertThat(posts.getClassification()).isEqualTo(dto.getClassification());
+        Materials materials = materialsRepository.findAll().get(0);
+        assertThat(materials.getPrice()).isEqualTo(dto.getPrice());
+        assertThat(materials.getStandard()).isEqualTo(dto.getStandard());
+        assertThat(materials.getItem()).isEqualTo(dto.getItem());
+        assertThat(materials.getClassification()).isEqualTo(dto.getClassification());
     }
 }

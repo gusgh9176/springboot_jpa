@@ -36,19 +36,19 @@ public class MaterialsRepositoryTest {
     public void 게시글저장_불러오기() {
         //given
         materialsRepository.save(Materials.builder()
-                .classification("test title")
-                .item("test content")
-                .standard("jojoldu@gmail.com")
+                .classification("test classification")
+                .item("test item")
+                .standard("2.5m")
                 .price(10000)
                 .build());
 
         //when
-        List<Materials> postsList = materialsRepository.findAll();
+        List<Materials> materialsList = materialsRepository.findAll();
 
         //then
-        Materials posts = postsList.get(0);
-        assertThat(posts.getClassification(), is("test title"));
-        assertThat(posts.getItem(), is("test content"));
+        Materials posts = materialsList.get(0);
+        assertThat(posts.getClassification(), is("test classification"));
+        assertThat(posts.getItem(), is("test iteam"));
     }
 
     @Test
@@ -56,16 +56,16 @@ public class MaterialsRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.now();
         materialsRepository.save(Materials.builder()
-                .classification("테스트 게시글")
-                .item("테스트 본문")
-                .standard("jojoldu@gmail.com")
+                .classification("테스트 골조")
+                .item("테스트 아이템")
+                .standard("2.6m")
                 .price(10000)
                 .build());
         //when
-        List<Materials> postsList = materialsRepository.findAll();
+        List<Materials> materialsList = materialsRepository.findAll();
 
         //then
-        Materials posts = postsList.get(0);
+        Materials posts = materialsList.get(0);
         assertTrue(posts.getCreatedDate().isAfter(now));
         assertTrue(posts.getModifiedDate().isAfter(now));
     }
