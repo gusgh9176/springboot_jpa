@@ -13,11 +13,6 @@ public class WebRestController {
     private MaterialsService materialsService;
 
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "HelloWorld";
-    }
-
     @PostMapping("/materials/insert")
     public Long saveMaterials(@RequestBody MaterialsSaveRequestDto dto){
         return materialsService.save(dto);
