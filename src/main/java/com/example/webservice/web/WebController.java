@@ -12,6 +12,11 @@ public class WebController {
 
     private MaterialsService materialsService;
 
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
+
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("skeletons", materialsService.findSkeleton());
