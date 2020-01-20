@@ -48,7 +48,7 @@ public class MaterialsRepositoryTest {
         //then
         Materials posts = materialsList.get(0);
         assertThat(posts.getClassification(), is("test classification"));
-        assertThat(posts.getItem(), is("test iteam"));
+        assertThat(posts.getItem(), is("test item"));
     }
 
     @Test
