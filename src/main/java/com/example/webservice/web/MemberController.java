@@ -18,54 +18,54 @@ public class MemberController {
     private MaterialsService materialsService;
 
     // 회원가입 페이지
-    @GetMapping("/user/signup")
+    @GetMapping("user/signup")
     public String dispSignup() {
-        return "/signup";
+        return "signup";
     }
 
     // 회원가입 처리
-    @PostMapping("/user/signup")
+    @PostMapping("user/signup")
     public String execSignup(MemberDto memberDto) {
         if(memberService.joinUser(memberDto)== (long)-1){
-            return "redirect:/user/signupFailure";
+            return "redirect:user/signupFailure";
         }
-        return "redirect:/user/login";
+        return "redirect:user/login";
     }
 
     // 회원가입 실패 페이지
-    @GetMapping("/user/signupFailure")
+    @GetMapping("user/signupFailure")
     public String dispSignupFailure() {
-        return "/signupFailure";
+        return "signupFailure";
     }
 
     // 로그인 페이지
-    @GetMapping("/user/login")
+    @GetMapping("user/login")
     public String dispLogin() {
-        return "/login";
+        return "login";
     }
 
     // 로그인 결과 페이지
-    @GetMapping("/user/login/result")
+    @GetMapping("user/login/result")
     public String dispLoginResult() {
-        return "/loginSuccess";
+        return "loginSuccess";
     }
 
     // 로그아웃 결과 페이지
-    @GetMapping("/user/logout/result")
+    @GetMapping("user/logout/result")
     public String dispLogout() {
-        return "/logout";
+        return "logout";
     }
 
     // 접근 거부 페이지
-    @GetMapping("/user/denied")
+    @GetMapping("user/denied")
     public String dispDenied() {
-        return "/denied";
+        return "denied";
     }
 
     // 어드민 페이지
-    @GetMapping("/admin")
+    @GetMapping("admin")
     public String dispAdmin(Model model) {
         model.addAttribute("materials", materialsService.findAllDesc());
-        return "/admin";
+        return "admin";
     }
 }

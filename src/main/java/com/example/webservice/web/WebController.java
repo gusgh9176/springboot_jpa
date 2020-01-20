@@ -12,7 +12,7 @@ public class WebController {
 
     private MaterialsService materialsService;
 
-    @GetMapping("/test")
+    @GetMapping("test")
     public String test(){
         return "test";
     }

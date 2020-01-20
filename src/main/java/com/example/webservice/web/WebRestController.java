@@ -12,12 +12,12 @@ public class WebRestController {
 
     private MaterialsService materialsService;
 
-    @PostMapping("/materials/insert")
+    @PostMapping("materials/insert")
     public Long saveMaterials(@RequestBody MaterialsSaveRequestDto dto){
         return materialsService.save(dto);
     }
 
-    @PostMapping("/materials/delete")
+    @PostMapping("materials/delete")
     public Long deleteMaterials(@RequestBody MaterialsDeleteRequestDto dto) { return materialsService.delete(dto);}
 
 }
