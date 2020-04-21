@@ -1,7 +1,7 @@
 package com.example.webservice.domain;
 
-import com.example.webservice.domain.posts.Posts;
-import com.example.webservice.domain.posts.PostsRepository;
+import com.example.webservice.domain.materials.Materials;
+import com.example.webservice.domain.materials.MaterialsRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +18,10 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostsRepositoryTest {
+public class MaterialsRepositoryTest {
 
     @Autowired
-    PostsRepository postsRepository;
+    MaterialsRepository materialsRepository;
 
     @After
     public void cleanup() {
@@ -29,41 +29,43 @@ public class PostsRepositoryTest {
          이후 테스트 코드에 영향을 끼치지 않기 위해
          테스트 메소드가 끝날때 마다 respository 전체 비우는 코드
          **/
-        postsRepository.deleteAll();
+        materialsRepository.deleteAll();
     }
 
     @Test
     public void 게시글저장_불러오기() {
         //given
-        postsRepository.save(Posts.builder()
-                .title("test title")
-                .content("test content")
-                .author("jojoldu@gmail.com")
+        materialsRepository.save(Materials.builder()
+                .classification("test classification")
+                .item("test item")
+                .standard("2.5m")
+                .price(10000)
                 .build());
 
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Materials> materialsList = materialsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
-        assertThat(posts.getTitle(), is("test title"));
-        assertThat(posts.getContent(), is("test content"));
+        Materials posts = materialsList.get(0);
+        assertThat(posts.getClassification(), is("test classification"));
+        assertThat(posts.getItem(), is("test item"));
     }
 
     @Test
     public void BaseTimeEntity_등록 () {
         //given
         LocalDateTime now = LocalDateTime.now();
-        postsRepository.save(Posts.builder()
-                .title("테스트 게시글")
-                .content("테스트 본문")
-                .author("jojoldu@gmail.com")
+        materialsRepository.save(Materials.builder()
+                .classification("테스트 골조")
+                .item("테스트 아이템")
+                .standard("2.6m")
+                .price(10000)
                 .build());
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Materials> materialsList = materialsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
+        Materials posts = materialsList.get(0);
         assertTrue(posts.getCreatedDate().isAfter(now));
         assertTrue(posts.getModifiedDate().isAfter(now));
     }

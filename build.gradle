@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+//    id 'war' // jar 파일 생성할 때는 주석 처리
 }
 
 group = 'com.example'
@@ -18,18 +19,30 @@ repositories {
     mavenCentral()
 }
 
+//war {
+//    baseName = 'springboot_jpa'
+//}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
+
+    runtimeOnly 'com.h2database:h2' // H2 DB
+    runtimeOnly 'mysql:mysql-connector-java' // mysql
+
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
 //        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//
 }
 
 test {
