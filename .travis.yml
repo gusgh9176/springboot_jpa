@@ -31,6 +31,6 @@ deploy:
     acl: public_read
     wait-until-deployed: true
     on:
-      repo: https://github.com/gusgh9176/springboot_jpa #Github 주소
+      repo: gusgh9176/springboot_jpa #Github 주소
       branch: 4-1.travisCI
 
