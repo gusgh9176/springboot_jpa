@@ -15,11 +15,10 @@ cache:
 
 script: "./gradlew clean build"
 
-# CI 실행 완료시 메일로 알람
-notifications:
-  email:
-    recipients:
-      - tnvjaos07@gmail.com
+before_deploy:
+  - zip -r springboot-webservice *
+  - mkdir -p deploy
+  - mv springboot-webservice.zip deploy/springboot-webservice.zip
 
 deploy:
   - provider: s3
@@ -30,7 +29,13 @@ deploy:
     skip_cleanup: true
     acl: public_read
     wait-until-deployed: true
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
     on:
       repo: gusgh9176/springboot_jpa #Github 주소
       branch: 4-1.travisCI # 버킷 권한 변경 후 테스트 위한 주석
 
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - tnvjaos07@gmail.com
